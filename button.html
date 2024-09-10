@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dlang | Portfolio</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> 
+ 
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+ 
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .floating-widget {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .feedback-btn {
+            background-color: #f8f9fa;
+            color: #1150a1;
+            border: none;
+            padding: 10px 10px;
+            border-radius: 200px;
+            font-size: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .chat-widget {
+            display: none;
+            width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .user-info h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .user-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            margin-left: 5px;
+            display: inline-block;
+        }
+        .close-btn {
+            margin-left: auto;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+        }
+        .timestamp {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            padding: 5px 0;
+        }
+        .message {
+            background-color: #f0f0f0;
+            border-radius: 18px;
+            padding: 10px 15px;
+            margin: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .message img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .start-chat {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .social-icons a {
+            background-color: #149ddd;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-widget">
+        <div class="chat-widget" id="chatWidget">
+            <div class="header">
+                <img src="assets/img/profile-img.jpeg" alt="David">
+                <div class="user-info">
+                    <h3>Dlang <span class="status-dot"></span></h3>
+                    <p>online</p>
+                </div>
+                <span class="close-btn" onclick="toggleWidget()">&times;</span>
+            </div>
+            
+            <div class="timestamp" id="timestamp"></div>
+            
+            <div class="message">
+                <img src="assets/img/profile-img.jpeg" alt="User">
+                Hi there 👋<br><br>
+                How can I help you?
+            </div>
+            
+            <div class="start-chat">Start Chat with:</div>
+            
+            <div class="social-icons">
+                <a href="https://wa.me/254700760386?text=Greetings.%20I'd%20like%20to%20inquire%20about%20your%20web%20development%20services" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://instagram.com/k.i.p_r.o.t.i.c.h" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/messaging/compose/?amokip=amokip&message=Greetings.%20I'd%20like%20to%20inquire%20about%20your%20web%20development%20services" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="tel:+254700760386" title="Phone"><i class="fas fa-phone"></i></a> 
+            </div>
+        </div>
+        <button class="feedback-btn" onclick="toggleWidget()"><i class="fab fa-telegram"></i></button>
+    </div>
+
+    <script>
+        function updateTimestamp() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('timestamp').textContent = `${hours}:${minutes}`;
+        }
+
+        function toggleWidget() {
+            const widget = document.getElementById('chatWidget');
+            if (widget.style.display === 'none' || widget.style.display === '') {
+                widget.style.display = 'block';
+                updateTimestamp();
+            } else {
+                widget.style.display = 'none';
+            }
+        }
+
+        updateTimestamp();
+        setInterval(updateTimestamp, 60000); // Update every minute
+    </script>
+</body>
+</html>
